@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PackageService extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'package_id',
+        'service_id',
+        'limit_quota',
+        'user_count',
+    ];
 }

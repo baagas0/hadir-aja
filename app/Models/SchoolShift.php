@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SchoolShift extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'school_id',
+        'shift_name',
+        'time_tolerance',
+    ];
 }

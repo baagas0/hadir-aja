@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class SchoolLocation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'school_id',
+        'title',
+        'address',
+        'lat',
+        'long',
+        'radius_distance',
+    ];
 }
