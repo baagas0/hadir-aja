@@ -1,3 +1,12 @@
+@php
+    $currentRoute = Route::current()->getName();
+    $sd = [
+        'master-data' => ['school-location', 'school-position', 'school-group', 'school-shift'],
+        'presence' => ['presence-daily', 'presence-monthly'],
+        'billings' => ['billing-invoice', 'billing-history'],
+        'add-on' => ['school', 'service', 'package', 'school-billing', 'users', 'role', 'school-role'],
+    ];
+@endphp
 <div id="kt_app_sidebar" class="app-sidebar flex-column" data-kt-drawer="true" data-kt-drawer-name="app-sidebar" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="250px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
     <!--begin::Wrapper-->
     <div id="kt_app_sidebar_wrapper" class="app-sidebar-wrapper">
@@ -6,7 +15,7 @@
             <div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false" class="app-sidebar-menu-primary menu menu-column menu-rounded menu-sub-indention menu-state-bullet-primary px-3 mb-5">
                 <!--begin:Menu item-->
                 <div class="menu-item ">
-                    <a class="menu-link active" href="/dashboard">
+                    <a class="menu-link {{ $currentRoute == 'dashboard' ? 'active' : '' }}" href="/dashboard">
                         <span class="menu-icon">
                             <i class="ki-outline ki-home-2 fs-2"></i>
                         </span>
@@ -27,7 +36,7 @@
                 <!--end:Menu item-->
 
                 <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item menu-accordion {{ in_array($currentRoute, $sd['master-data']) ? 'hover show' : '' }}">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -38,11 +47,11 @@
                     </span>
                     <!--end:Menu link-->
                     <!--begin:Menu sub-->
-                    <div class="menu-sub menu-sub-accordion">
+                    <div class="menu-sub menu-sub-accordion {{ in_array($currentRoute, $sd['master-data']) ? 'show' : '' }}">
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('school-location') }}">
+                            <a class="menu-link {{ $currentRoute == 'school-location' ? 'active' : '' }}" href="{{ route('school-location') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -67,7 +76,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('school-position') }}">
+                            <a class="menu-link {{ $currentRoute == 'school-position' ? 'active' : '' }}" href="{{ route('school-position') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -79,7 +88,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('school-group') }}">
+                            <a class="menu-link {{ $currentRoute == 'school-group' ? 'active' : '' }}" href="{{ route('school-group') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -91,7 +100,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('school-shift') }}">
+                            <a class="menu-link {{ $currentRoute == 'school-shift' ? 'active' : '' }}" href="{{ route('school-shift') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -103,7 +112,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('school-calendar') }}">
+                            <a class="menu-link {{ $currentRoute == 'school-calendar' ? 'active' : '' }}" href="{{ route('school-calendar') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
