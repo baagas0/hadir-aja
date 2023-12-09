@@ -25,6 +25,7 @@ License: For each use you must have a valid license purchased only from above li
 		<meta property="og:title" content="HadirAja - Presensi menjadi lebih mudah" />
 		<meta property="og:url" content="https://keenthemes.com/metronic" />
 		<meta property="og:site_name" content="Metronic by Keenthemes" />
+		<meta name="csrf-token" content="{{ csrf_token() }}" />
 		<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
 		<link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}" />
 		<!--begin::Fonts(mandatory for all pages)-->
@@ -34,6 +35,7 @@ License: For each use you must have a valid license purchased only from above li
         @stack('css')
 		<!--end::Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+		<link href="{{ asset('assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
@@ -94,10 +96,20 @@ License: For each use you must have a valid license purchased only from above li
 		<!--end::Scrolltop-->
         
 		<!--begin::Javascript-->
-		<script>var hostUrl = "{{ asset('assets/') }}";</script>
+		<script>var hostUrl = "{{ asset('assets') }}/";</script>
 		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
 		<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+		<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
+		<script type="text/javascript">
+			$.ajaxSetup({
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				}
+			});
+		</script>
+
 		<!--end::Global Javascript Bundle-->
         
 		<!--begin::Custom Javascript(used for this page only)-->
