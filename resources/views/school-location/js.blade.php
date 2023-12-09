@@ -69,8 +69,7 @@
                     { data: 'id' },
                     { data: 'title' },
                     { data: 'address' },
-                    { data: 'lat' },
-                    { data: 'long' },
+                    { data: 'location' },
                     { data: 'radius_distance' },
                     { data: null },
                 ],
@@ -86,7 +85,7 @@
                         }
                     },
                     {
-                        targets: 5,
+                        targets: 4,
                         render: function (data, type, row) {
                             return `${data} Meter`;
                         }
@@ -339,7 +338,6 @@
                         });
                     }
                 }).then(function (result) {
-                    console.log(`requestError ${requestError}`)
                     if (result.value && !requestError) {
                         // Simulate delete request -- for demo purpose only
                         Swal.fire({
@@ -425,7 +423,6 @@
                 // form.trigger('reset');
                 for (const item of form.serializeArray()) {
                     const el = $(`[name="${item.name}"]`);
-                    console.log(el);
                     if (el.length && el[0].tagName.toLowerCase() === 'input') {
                         el.val('');
                     } else if (el.length && el[0].tagName.toLowerCase() === 'textarea') {
@@ -444,7 +441,7 @@
                 
                 if (state === 'update') {
                     $('#modal_title_{{ $_id }}').text('Edit {{ $title }}');
-                    form.attr('action', '{{ $route["update"] }}');
+                    form.attr('action', `{{ $route["update"] }}/${id}`);
                     $.ajax({
                         url: '{{  $route["detail"] }}',
                         method: 'get',
@@ -514,7 +511,7 @@
                 const modal = bootstrap.Modal.getInstance(m);
            
                 const data = buildValue(form);
-                console.log(data);
+                // console.log(data);
                 
                 $.ajax({
                     url: form.attr('action'),

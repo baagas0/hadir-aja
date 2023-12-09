@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('school_id');
             $table->string('title');
             $table->text('address');
+            $table->text('location');
             $table->string('lat');
             $table->string('long');
             $table->integer('radius_distance');

@@ -64,7 +64,52 @@ class SchoolLocationController extends Controller
     }
 
     public function postUpdate(Request $request, $id) {
+        $validation = Validator::make($request->all(), [
+            // 'school_id'         => 'required',
+            'title'             => 'required|max:255',
+            'address'           => 'required',
+            'lat'               => 'required|numeric',
+            'long'              => 'required|numeric',
+            'radius_distance'   => 'required|numeric',
+        ]);
 
+        if ($validation->fails()) {
+            return response()->json([
+                'status' => 'gagal',
+                'message' =>  $validation->errors()->first()
+            ], 422);
+        }
+
+        if (!Auth::user() || (Auth::user() && !Auth::user()->school_id)) {
+            return response()->json([
+                'status' => 'gagal',
+                'message' =>  'User anda tidak tertaut pada sekolah manapun. Hubungi Admin untuk informasi lebih lanjut'
+            ], 422);
+        }
+
+        $school_id = Auth::user()->school_id;
+
+        $data = SchoolLocation::findOrFail($id);
+        if($data->school_id !== $school_id) {
+            return response()->json([
+                'status' => 'gagal',
+                'message' =>  'User anda tidak memiliki akses untuk mengubah data ini'
+            ], 422);
+        }
+
+        $update = $data->update($request->all());
+
+        if(!$update) {
+            return response()->json([
+                'status' => 'gagal',
+                'message' =>  'Data tidak berhasil ditambahkan'
+            ], 422);
+        }
+
+        return response()->json([
+          'status' =>'sukses',
+          'message' => 'Data berhasil diperbarui',
+        ], 200);
     }
 
     public function postStore(Request $request) {
