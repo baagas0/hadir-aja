@@ -12,32 +12,7 @@
 <script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyArJkzKNSGOGAwtMcsCl6cRlFfAG_dIqmE&libraries=places'></script>
 <script src="{{ asset('assets/js/custom/locationpicker.jquery.js') }}"></script>
 <script>
-    $('#maps').locationpicker({
-        location: {latitude: -6.990275700949499, longitude: 110.42294344386147},
-        radius: 300,
-        inputBinding: {
-            latitudeInput: $('#lat'),
-            longitudeInput: $('#long'),
-            radiusInput: $('#radius_distance'),
-            locationNameInput: $('#location')
-        },
-        enableAutocomplete: true,
-        autocompleteOptions: {
-            types: ['(cities)'],
-            componentRestrictions: {country: 'id'}
-        },
-        oninitialized: function(component) {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function(position){ 
-                    component.locationpicker('location', {
-                        // radius: 3000,
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    });
-                });
-            }
-        }
-	});
+    
 </script>
 <script>
     "use strict";
@@ -48,6 +23,7 @@
         var table;
         var dt;
         var filterPayment;
+        var maps;
 
         // Private functions
         var initDatatable = function () {
@@ -415,6 +391,37 @@
             }
         }
 
+        var handleMaps = function () {
+            $('#maps').locationpicker({
+                location: {latitude: -6.990275700949499, longitude: 110.42294344386147},
+                radius: 300,
+                inputBinding: {
+                    latitudeInput: $('#lat'),
+                    longitudeInput: $('#long'),
+                    radiusInput: $('#radius_distance'),
+                    locationNameInput: $('#location')
+                },
+                enableAutocomplete: true,
+                autocompleteOptions: {
+                    types: ['(cities)'],
+                    componentRestrictions: {country: 'id'}
+                },
+                oninitialized: function(component) {
+                    console.log("Maps initialized");
+                    maps = component;
+                    if ("geolocation" in navigator) {
+                        navigator.geolocation.getCurrentPosition(function(position){
+                            component.locationpicker('location', {
+                                // radius: 3000,
+                                latitude: position.coords.latitude,
+                                longitude: position.coords.longitude
+                            });
+                        });
+                    }
+                }
+            });
+        }
+
         // MODAL SHOW
         var modalShow = function () {
             const m = document.getElementById('modal_{{ $_id }}');
@@ -466,6 +473,12 @@
                                     }
                                 }
                             }
+
+                            maps.locationpicker('location', {
+                                // radius: 3000,
+                                latitude: data.lat,
+                                longitude: data.long
+                            });
                         },
                         error: function(error) {
                             let data = error.responseJSON;
@@ -562,6 +575,7 @@
                 handleFilterDatatable();
                 handleDeleteRows();
                 handleResetForm();
+                handleMaps();
                 modalShow();
                 formSubmit();
             }
