@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('group_code');
             $table->foreignId('school_shift_id');
             $table->foreignId('daily_presence_service_id');
-            $table->foreignId('group_role_id');
+            $table->boolean('is_can_create_presence')->default(0);
             $table->timestamps();
         });
     }

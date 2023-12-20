@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('billing_active_id');
             $table->string('school_level'); // SMP or SMK or SMA or University
             $table->string('school_name');
             $table->string('school_address');
