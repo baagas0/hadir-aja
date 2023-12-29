@@ -19,4 +19,9 @@ class SchoolBillingQuota extends Model
         'used_quota',
         'remaining_quota',
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

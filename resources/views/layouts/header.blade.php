@@ -705,9 +705,10 @@
             <!--end::Header menu toggle-->
         </div>
         <!--end::Navbar-->
+        
     </div>
     <!--end::Header main-->
     <!--begin::Separator-->
-    <div class="app-header-separator"></div>
+    
     <!--end::Separator-->
 </div>

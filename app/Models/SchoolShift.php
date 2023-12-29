@@ -23,14 +23,23 @@ class SchoolShift extends Model
         'time_tolerance',
     ];
 
+    protected $appends = [
+        'duration'
+    ];
+
     protected static function boot()
     {
         parent::boot();
 
         static::addGlobalScope('school_id', function (Builder $builder) {
             $auth = Auth::user();
-            $builder->where('school_id',  $auth->school_id);
+            // $builder->where('school_id',  $auth->school_id);
+            if($auth) $builder->where('school_id',  $auth->school_id);
         });
+    }
+
+    public function getDurationAttribute() {
+        return 10000;
     }
 
     public function school_shift_hours() {

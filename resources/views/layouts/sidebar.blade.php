@@ -72,6 +72,19 @@
                             <!--end:Menu link-->
                         </div> --}}
                         <!--end:Menu item-->
+
+                        <!--begin:Menu item-->
+                        <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ $currentRoute == 'school-group' ? 'active' : '' }}" href="{{ route('school-group') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Grup Sekolah</span>
+                            </a>
+                            <!--end:Menu link-->
+                        </div>
+                        <!--end:Menu item-->
                         
                         <!--begin:Menu item-->
                         <div class="menu-item">
@@ -94,19 +107,6 @@
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Jam Masuk</span>
-                            </a>
-                            <!--end:Menu link-->
-                        </div>
-                        <!--end:Menu item-->
-                        
-                        <!--begin:Menu item-->
-                        <div class="menu-item">
-                            <!--begin:Menu link-->
-                            <a class="menu-link {{ $currentRoute == 'school-group' ? 'active' : '' }}" href="{{ route('school-group') }}">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">Grup Sekolah</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -185,6 +185,14 @@
                     <div class="menu-sub menu-sub-accordion">
                         <!--begin:Menu item-->
                         <div class="menu-item">
+                            <!--begin:Menu link-->
+                            <a class="menu-link" href="{{ route('billing-invoice.choose.package') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                <span class="menu-title">Pilih Paket Layanan</span>
+                            </a>
+                            <!--end:Menu link-->
                             <!--begin:Menu link-->
                             <a class="menu-link" href="{{ route('billing-invoice') }}">
                                 <span class="menu-bullet">

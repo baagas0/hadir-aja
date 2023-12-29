@@ -10,6 +10,7 @@ class School extends Model
     use HasFactory;
 
     protected $fillable = [
+        'active_billing_id',
         'school_level',
         'school_name',
         'school_address',

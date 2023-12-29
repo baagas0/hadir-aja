@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\SchoolGroup;
-use App\Models\SchoolShift;
+use App\Models\SchoolLocation;
+use App\Models\SchoolPosition;
+use App\Models\SchoolUser;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class SchoolGroupController extends Controller
+class SchoolUserController extends Controller
 {
     public function getIndex()
     {
         $data = [];
-        $data['school_shifts'] = SchoolShift::get();
-        $data['services'] = Service::get();
+        $data['school_groups'] = SchoolGroup::get();
+        $data['school_positions'] = SchoolPosition::get();
+        $data['school_locations'] = SchoolLocation::get();
 
-        return view('school-group.index', $data);
+        return view('school-user.index', $data);
     }
 
     public function getData(Request $request)
@@ -27,9 +30,9 @@ class SchoolGroupController extends Controller
 
         $search = $request->get('search')['value'];
 
-        $columns = SchoolGroup::COLUMNS;
+        $columns = SchoolUser::COLUMNS;
 
-        $data = SchoolGroup::query()
+        $data = SchoolUser::query()
             ->when(!is_null($search), function ($query) use ($columns, $search) {
                 foreach ($columns as $key => $column) {
                     if($key === 0) $query->where($column, 'like', '%'. $search. '%');
@@ -37,11 +40,11 @@ class SchoolGroupController extends Controller
                 }
                 return $query;
             })
-            ->with('school_shift', 'daily_presence_service')
+            ->with('school_group', 'school_position', 'school_location')
             ->skip($start)
             ->take($length)
             ->get();
-        $count = SchoolGroup::query()
+        $count = SchoolUser::query()
             ->when(!is_null($search), function ($query) use ($columns, $search) {
                 foreach ($columns as $key => $column) {
                     if($key === 0) $query->where($column, 'like', '%'. $search. '%');
@@ -60,7 +63,7 @@ class SchoolGroupController extends Controller
 
     public function getDataDetail(Request $request)
     {
-        $data = SchoolGroup::query()
+        $data = SchoolUser::query()
             ->where('id', $request->get('id'))
             ->first();
 
@@ -73,11 +76,14 @@ class SchoolGroupController extends Controller
     public function postUpdate(Request $request, $id) {
         $validation = Validator::make($request->all(), [
             // 'school_id'         => 'required',
-            'group_code'     => 'required|max:255',
-            'group_name'     => 'required|max:255',
-            'school_shift_id'=> 'required|exists:school_shifts,id',
-            'daily_presence_service_id' => 'required|exists:services,id',
-            // 'is_can_create_presence' => 'required',
+            'student_number'     => 'required|max:255',
+            'student_name'     => 'required|max:255',
+            'gender'     => 'required|max:255',
+            'email'     => 'required|max:255',
+            'phone_number'     => 'required|max:255',
+            'birth_date'     => 'required|max:255',
+            'school_group_id'=> 'required|exists:school_groups,id',
+            'school_position_id'=> 'required|exists:school_positions,id',
         ]);
 
         if ($validation->fails()) {
@@ -96,7 +102,7 @@ class SchoolGroupController extends Controller
 
         $school_id = Auth::user()->school_id;
 
-        $data = SchoolGroup::findOrFail($id);
+        $data = SchoolUser::findOrFail($id);
         if($data->school_id !== $school_id) {
             return response()->json([
                 'status' => 'gagal',
@@ -104,7 +110,10 @@ class SchoolGroupController extends Controller
             ], 422);
         }
 
-        $update = $data->update($request->all());
+        $payload = $request->all();
+        if ($request->is_all_location_presence) $payload['is_all_location_presence'] = 1;
+        else $payload['is_all_location_presence'] = 0;
+        $update = $data->update($payload);
 
         if(!$update) {
             return response()->json([
@@ -122,11 +131,14 @@ class SchoolGroupController extends Controller
     public function postStore(Request $request) {
         $validation = Validator::make($request->all(), [
             // 'school_id'         => 'required',
-            'group_code'     => 'required|max:255',
-            'group_name'     => 'required|max:255',
-            'school_shift_id'=> 'required|exists:school_shifts,id',
-            'daily_presence_service_id' => 'required|exists:services,id',
-            // 'is_can_create_presence' => '',
+            'student_number'     => 'required|max:255',
+            'student_name'     => 'required|max:255',
+            'gender'     => 'required|max:255',
+            'email'     => 'required|max:255',
+            'phone_number'     => 'required|max:255',
+            'birth_date'     => 'required|max:255',
+            'school_group_id'=> 'required|exists:school_groups,id',
+            'school_position_id'=> 'required|exists:school_positions,id',
         ]);
 
         if ($validation->fails()) {
@@ -145,7 +157,8 @@ class SchoolGroupController extends Controller
 
         $data = $request->all();
         $data['school_id'] = Auth::user()->school_id;
-        $store = SchoolGroup::create($data);
+        $data['password'] = bcrypt(123456);
+        $store = SchoolUser::create($data);
 
         if(!$store) {
             return response()->json([
@@ -169,7 +182,7 @@ class SchoolGroupController extends Controller
             ], 422);
         }
 
-        SchoolGroup::query()
+        SchoolUser::query()
             ->where('school_id', Auth::user()->school_id)
             ->where('id', $request->id)
             ->delete();
@@ -189,7 +202,7 @@ class SchoolGroupController extends Controller
         }
 
         $ids = $request->ids;
-        SchoolGroup::query()
+        SchoolUser::query()
             ->where('school_id', Auth::user()->school_id)
             ->whereIn('id', $ids)
             ->delete();

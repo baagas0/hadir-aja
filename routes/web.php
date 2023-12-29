@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
     routeController('school-group', 'SchoolGroupController');
     routeController('school-shift', 'SchoolShiftController');
     routeController('school-calendar', 'SchoolCalendarController');
+
+    routeController('school-users', 'SchoolUserController');
     
     routeController('presence-daily', 'PresenceDailyController');
     routeController('presence-class', 'PresenceClassController');

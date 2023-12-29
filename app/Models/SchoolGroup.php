@@ -35,7 +35,8 @@ class SchoolGroup extends Model
 
         static::addGlobalScope('school_id', function (Builder $builder) {
             $auth = Auth::user();
-            $builder->where('school_id',  $auth->school_id);
+            // $builder->where('school_id',  $auth->school_id);
+            if($auth) $builder->where('school_id',  $auth->school_id);
         });
     }
 

@@ -15,4 +15,9 @@ class PackageService extends Model
         'limit_quota',
         'user_count',
     ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }
