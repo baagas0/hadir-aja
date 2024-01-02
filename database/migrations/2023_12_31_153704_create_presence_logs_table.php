@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('school_billing_quota_transactions', function (Blueprint $table) {
+        Schema::create('presence_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id');
-            $table->foreignId('school_billing_id');
-            $table->foreignId('school_billing_quota_id');
             $table->foreignId('school_user_id');
-            $table->foreignId('service_id');
             $table->dateTime('datetime')->useCurrent();
             $table->string('ref_table');
             $table->string('ref_id');
             $table->string('type');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_billing_quota_transactions');
+        Schema::dropIfExists('presence_logs');
     }
 };

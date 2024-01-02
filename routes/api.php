@@ -30,4 +30,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::group(['as' => 'api.', 'prefix' => '', 'middleware' => 'auth:api'], function () {
     routeController('profile', 'API\ProfileController');
     routeController('daily-presence', 'API\DailyPresenceController');
+    routeController('presence', 'API\PresenceController');
 });

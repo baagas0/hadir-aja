@@ -17,4 +17,8 @@ class School extends Model
         'pic_name',
         'register_ref_code',
     ];
+
+    public function billing() {
+        return $this->belongsTo(SchoolBilling::class, 'active_billing_id');
+    }
 }

@@ -24,15 +24,16 @@ class AuthController extends Controller
             'password' => 'required|string',
             'device_id' => 'required|string',
         ]);
-        
+
         $credentials = $request->only('student_number', 'password', 'device_id');
 
         $user = SchoolUser::where('student_number', $credentials['student_number'])
             ->where('student_number', $credentials['student_number'])
+            ->with('school_group')
             ->first();
-        
+
         if (
-            $user->device_id !== $credentials['device_id'] && 
+            $user->device_id !== $credentials['device_id'] &&
             !is_null($user->device_id)
         ) {
             return response()->json([
@@ -40,7 +41,7 @@ class AuthController extends Controller
                 'message' => 'Perangkat tidak valid!',
             ], 401);
         }
-        
+
         if(!Hash::check($request->password, $user->password)) {
             return response()->json([
                 'status' => 'gagal',
@@ -48,7 +49,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $jwt = Auth::guard('api')->login($user);
+        $jwt = Auth::guard('api')->login($user, true);
         // dd($jwt);
 
         if (!$jwt) {
@@ -57,7 +58,7 @@ class AuthController extends Controller
                 'message' => 'Tidak dapat membuat otorisasi untuk anda.',
             ], 401);
         }
-        
+
         return response()->json([
             'user' => $user,
             'authorization' => [

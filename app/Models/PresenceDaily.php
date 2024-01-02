@@ -36,4 +36,16 @@ class PresenceDaily extends Model
         'state',
         'status',
     ];
+
+    protected $casts = [
+        'face_match_in_response' => 'array'
+    ];
+
+    public function school() {
+        return $this->belongsTo(School::class);
+    }
+
+    public function service() {
+        return $this->belongsTo(Service::class);
+    }
 }

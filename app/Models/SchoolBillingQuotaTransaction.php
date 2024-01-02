@@ -13,9 +13,15 @@ class SchoolBillingQuotaTransaction extends Model
         'school_id',
         'school_billing_id',
         'school_billing_quota_id',
+        'school_user_id',
         'service_id',
         'datetime',
         'ref_table',
         'ref_id',
+        'type',
     ];
+
+    public function daily_presence() {
+        return $this->belongsTo(PresenceDaily::class, 'ref_id');
+    }
 }

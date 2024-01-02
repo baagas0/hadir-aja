@@ -16,6 +16,6 @@ if (!function_exists('rApi')) {
             "data" => $result,
         ];
  
-        return response()->json($response, 200);
+        return response()->json($response, $status_code);
     }
 }

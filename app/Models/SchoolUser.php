@@ -66,6 +66,11 @@ class SchoolUser extends Authenticatable implements JWTSubject
         });
     }
 
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
+
     public function school_group()
     {
         return $this->belongsTo(SchoolGroup::class);
