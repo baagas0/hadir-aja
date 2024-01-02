@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('school_user_id');
             $table->foreignId('presence_barcode_id');
 
-            $table->time('hour_in')->comment('');
-            $table->time('hour_out')->comment('');
+            $table->time('hour_in')->nullable()->comment('');
+            $table->time('hour_out')->nullable()->comment('');
             $table->integer('duration')->default(0)->comment('satuan menit');
 
             $table->enum('state', ['tidak diketahui', 'masuk', 'pulang'])->default('tidak diketahui');

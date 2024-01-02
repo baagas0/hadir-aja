@@ -28,4 +28,9 @@ class PresenceBarcodeSchoolUser extends Model
         'state',
         'status',
     ];
+
+    public function presence_barcode()
+    {
+        return $this->belongsTo(PresenceBarcode::class);
+    }
 }

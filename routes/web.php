@@ -27,7 +27,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-    
+
     routeController('school-location', 'SchoolLocationController');
     routeController('school-position', 'SchoolPositionController');
     routeController('school-group', 'SchoolGroupController');
@@ -35,17 +35,17 @@ Route::group(['middleware' => 'auth'], function () {
     routeController('school-calendar', 'SchoolCalendarController');
 
     routeController('school-users', 'SchoolUserController');
-    
+
     routeController('presence-daily', 'PresenceDailyController');
-    routeController('presence-class', 'PresenceClassController');
-    
+    routeController('presence-barcode', 'PresenceBarcodeController');
+
     routeController('billing-invoice', 'BillingInvoiceController');
     routeController('billing-history', 'BillingHistoryController');
-    
+
     routeController('school', 'SchoolController');
     routeController('services', 'ServicesController');
     routeController('packages', 'PackagesController');
-    
+
     routeController('user', 'UserController');
     routeController('role', 'RoleController');
     routeController('school-role-group', 'SchoolRoleGroupController'); // Akhir Aja

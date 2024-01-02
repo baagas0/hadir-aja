@@ -11,6 +11,7 @@ class PresenceBarcode extends Model
 
     protected $fillable = [
         'school_id',
+        'school_position_id',
         'service_id',
         'title',
         'description',
@@ -24,6 +25,7 @@ class PresenceBarcode extends Model
 
     const COLUMNS = [
         'school_id',
+        'school_position_id',
         'service_id',
         'title',
         'description',
