@@ -33,4 +33,9 @@ class PresenceBarcodeSchoolUser extends Model
     {
         return $this->belongsTo(PresenceBarcode::class);
     }
+
+    public function school_user()
+    {
+        return $this->belongsTo(SchoolUser::class);
+    }
 }

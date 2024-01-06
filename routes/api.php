@@ -31,4 +31,6 @@ Route::group(['as' => 'api.', 'prefix' => '', 'middleware' => 'auth:api'], funct
     routeController('profile', 'API\ProfileController');
     routeController('daily-presence', 'API\DailyPresenceController');
     routeController('presence', 'API\PresenceController');
+
+    routeController('presence-barcode', 'API\PresenceBarcodeController');
 });

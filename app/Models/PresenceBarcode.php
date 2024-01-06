@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class PresenceBarcode extends Model
 {
@@ -36,6 +38,34 @@ class PresenceBarcode extends Model
         'actual_duration',
         'qr_code',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope('school_id', function (Builder $builder) {
+            $auth = Auth::user();
+            if($auth) $builder->where('school_id',  $auth->school_id);
+        });
+    }
+
+    public function school() {
+        return $this->belongsTo(School::class);
+    }
+
+    public function service() {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function school_position()
+    {
+        return $this->belongsTo(SchoolPosition::class);
+    }
+
+    public function barcode_user()
+    {
+        return $this->hasMany(PresenceBarcodeSchoolUser::class)->orderBy('hour_in');;
+    }
 
     public static function createQRCode()
     {

@@ -17,13 +17,14 @@ class ProfileController extends Controller
         $path = public_path().'/image/selfie/' . $png_url;
 
         $success = file_put_contents($path, base64_decode($request->selfie_image_base64));
-        
+
         $school_user_id = Auth::guard('api')->user()->id;
         SchoolUser::findOrFail($school_user_id)
             ->update([
                 'selfie_img' => $png_url
             ]);
 
-        return rApi(200, Auth::guard('api')->user());
+        $data = SchoolUser::with('school_group')->findOrFail($school_user_id);
+        return rApi(200, $data, 'Foto profile berhasil diperbarui');
     }
 }
