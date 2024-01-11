@@ -214,7 +214,7 @@
 									</div>
 									<!--end::Features-->
 									<!--begin::Select-->
-									<a href="#" class="btn btn-sm btn-primary">Pilih Paket</a>
+									<a href="{{ url('payment/package/2') }}" class="btn btn-sm btn-primary">Pilih Paket</a>
 									<!--end::Select-->
 								</div>
 								<!--end::Option-->

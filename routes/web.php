@@ -50,4 +50,6 @@ Route::group(['middleware' => 'auth'], function () {
     routeController('role', 'RoleController');
     routeController('school-role-group', 'SchoolRoleGroupController'); // Akhir Aja
 
+    routeController('payment', 'PaymentController');
+    routeController('checkout', 'CheckoutController');
 });
