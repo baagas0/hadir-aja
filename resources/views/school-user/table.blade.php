@@ -17,7 +17,7 @@
         <div class="col-xl-6 col-md-6 col-sm-12">
             <!--begin::Toolbar-->
             <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-        
+
                 <!--begin::Add customer-->
                 <button type="button" class="btn btn-primary"  title="Tambah Data" data-bs-toggle="modal" data-bs-target="#modal_{{ $_id }}" data-state="create">
                     <i class="ki-duotone ki-plus fs-2"></i>
@@ -31,7 +31,7 @@
                 <div class="fw-bold me-5">
                     <span class="me-2" data-kt-docs-table-select="selected_count"></span> Selected
                 </div>
-        
+
                 <button type="button" class="btn btn-danger" data-kt-docs-table-select="delete_selected" data-bs-toggle="tooltip" title="Coming Soon">
                     Selection Action
                 </button>
@@ -213,6 +213,19 @@
                         </label>
                         <!--end::Label-->
                         <input type="date" class="form-control form-control-solid" placeholder="Masukan Tanggal Lahir {{ $title }}" name="birth_date">
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
+                    </div>
+
+                    <div class="d-flex flex-column mb-8 fv-row fv-plugins-icon-container">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                            <span class="required">Kata Sandi</span>
+                            <span class="ms-1" data-bs-toggle="tooltip" title="Input Kata Sandi Pengguna">
+                                <i class="ki-outline ki-information-5 text-gray-500 fs-6"></i>
+                            </span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Masukan Kata Sandi {{ $title }}" name="password">
                         <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                     </div>
 

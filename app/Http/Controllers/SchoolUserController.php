@@ -113,6 +113,13 @@ class SchoolUserController extends Controller
         $payload = $request->all();
         if ($request->is_all_location_presence) $payload['is_all_location_presence'] = 1;
         else $payload['is_all_location_presence'] = 0;
+
+        if($request->password) {
+            $payload['password'] = bcrypt($request->password);
+        } else {
+            unset($payload['password']);
+        }
+
         $update = $data->update($payload);
 
         if(!$update) {
@@ -137,6 +144,7 @@ class SchoolUserController extends Controller
             'email'     => 'required|max:255',
             'phone_number'     => 'required|max:255',
             'birth_date'     => 'required|max:255',
+            'password'     => 'required|max:255',
             'school_group_id'=> 'required|exists:school_groups,id',
             'school_position_id'=> 'required|exists:school_positions,id',
         ]);
@@ -157,7 +165,7 @@ class SchoolUserController extends Controller
 
         $data = $request->all();
         $data['school_id'] = Auth::user()->school_id;
-        $data['password'] = bcrypt(123456);
+        $data['password'] = bcrypt($request->password ?? 123456);
         $store = SchoolUser::create($data);
 
         if(!$store) {
