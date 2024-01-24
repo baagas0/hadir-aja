@@ -24,4 +24,8 @@ class SchoolBillingQuotaTransaction extends Model
     public function daily_presence() {
         return $this->belongsTo(PresenceDaily::class, 'ref_id');
     }
+    
+    public function barcode_presence() {
+        return $this->belongsTo(PresenceBarcodeSchoolUser::class, 'ref_id');
+    }
 }

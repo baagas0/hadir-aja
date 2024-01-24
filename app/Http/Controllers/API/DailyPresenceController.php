@@ -279,18 +279,12 @@ class DailyPresenceController extends Controller
 
     public function face_matching ($relative_path_file_1, $relative_path_file_2) {
         // TO RUN SERVER *python flask_server.py*
-        $url = 'http://labs.reprime.id:8000';
-
-        $base64 = [
-            'face_source' => base64_encode(file_get_contents($relative_path_file_1)),
-            'face_target' => base64_encode(file_get_contents($relative_path_file_2)),
-        ];
-        // dd($base64);
+        $url = 'https://a02e-158-140-170-3.ngrok-free.app';
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$url/myface/",
+            CURLOPT_URL => "$url/face_match",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -298,19 +292,14 @@ class DailyPresenceController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            // CURLOPT_POSTFIELDS => array('file1'=> new CURLFILE($relative_path_file_1),'file2'=> new CURLFILE($relative_path_file_2)),
-            CURLOPT_POSTFIELDS => $base64,
+            CURLOPT_POSTFIELDS => array('file1'=> new CURLFILE($relative_path_file_1),'file2'=> new CURLFILE($relative_path_file_2)),
             CURLOPT_HTTPHEADER => array(
             ),
         ));
 
         $response = curl_exec($curl);
+
         curl_close($curl);
-        $res = json_decode($response);
-
-        // Respon Manipulation
-        if (isset($res->api_status)) $res->data = (object) [ 'match' => $res->face_match >= 0.5, 'match_precentage' => $res->face_match, 'error_procentage' => 1-$res->face_match, 'host' => $url ];
-
-        return $res;
+        return json_decode($response);
     }
 }

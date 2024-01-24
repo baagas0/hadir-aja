@@ -14,8 +14,8 @@
             <!--end::Sidebar mobile toggle-->
             <!--begin::Logo-->
             <a href="index.html" class="app-sidebar-logo">
-                <img alt="Logo" src="{{ asset('assets/media/logos/demo39.svg') }}" class="h-25px theme-light-show" />
-                <img alt="Logo" src="{{ asset('assets/media/logos/demo39-dark.svg') }}" class="h-25px theme-dark-show" />
+                <img alt="Logo" src="{{ asset('assets/media/logos/logo-hadir-aja.png') }}" class="h-25px theme-light-show" style="height: 31px !important;" />
+                <img alt="Logo" src="{{ asset('assets/media/logos/logo-hadir-aja.png') }}" class="h-25px theme-dark-show" style="height: 31px !important;" />
             </a>
             <!--end::Logo-->
         </div>

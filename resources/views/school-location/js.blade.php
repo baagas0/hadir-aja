@@ -9,7 +9,7 @@
         'bulk-delete' => route('school-location.bulk.delete'),
     ];
 @endphp
-<script type="text/javascript" src='http://maps.google.com/maps/api/js?key=AIzaSyArJkzKNSGOGAwtMcsCl6cRlFfAG_dIqmE&libraries=places'></script>
+<script type="text/javascript" src='https://maps.google.com/maps/api/js?key=AIzaSyArJkzKNSGOGAwtMcsCl6cRlFfAG_dIqmE&libraries=places'></script>
 <script src="{{ asset('assets/js/custom/locationpicker.jquery.js') }}"></script>
 <script>
     
