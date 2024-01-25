@@ -203,12 +203,12 @@
                             </a>
                             <!--end:Menu link-->
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('billing-history') }}">
+                            {{-- <a class="menu-link" href="{{ route('billing-history') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">Riwayat Layanan</span>
-                            </a>
+                            </a> --}}
                             <!--end:Menu link-->
                         </div>
                         <!--end:Menu item-->
@@ -217,7 +217,7 @@
                 </div>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -322,7 +322,7 @@
 
                     </div>
                     <!--end:Menu sub-->
-                </div>
+                </div> --}}
                 <!--end:Menu item-->
             </div>
             <!--end::Sidebar menu-->

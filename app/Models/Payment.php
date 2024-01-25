@@ -23,6 +23,12 @@ class Payment extends Model
         'approval_at'
     ];
 
+    protected $casts = [
+        'expired_at'  => 'date:Y-m-d',
+        'approval_at'  => 'date:Y-m-d',
+    ];
+
+
     public function user()
     {
         return $this->belongsTo(User::class);

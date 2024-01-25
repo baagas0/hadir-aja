@@ -12,7 +12,7 @@
           <div class="d-flex flex-stack pb-10">
             <!--begin::Logo-->
             <a href="#">
-              <img alt="Logo" src="assets/media/svg/brand-logos/code-lab.svg" />
+              <img alt="Logo" src="{{ asset('assets/media/logos/logo-hadir-aja.png') }}" style="width: 150px" />
             </a>
             <!--end::Logo-->
             @if($billing->status === 'pending')
@@ -121,7 +121,7 @@
                       <td class="fs-5 text-gray-900 fw-bolder">-</td>
                     </tr>
                     @endforeach
-                    
+
                   </tbody>
                 </table>
               </div>

@@ -11,7 +11,7 @@
       <!--end::Title-->
 
       <!--begin::Content-->
-      <span>Paket anda akan berakhir dalam 25 hari kedepan.</span>
+      <span>Paket anda akan berakhir dalam {{ auth()->guard('web')->user()->school->remain_day }} hari kedepan.</span>
       <!--end::Content-->
   </div>
   <!--end::Wrapper-->

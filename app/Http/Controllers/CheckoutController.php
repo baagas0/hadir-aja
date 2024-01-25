@@ -60,18 +60,20 @@ class CheckoutController extends Controller
             ]);
         }
 
-        return redirect('/checkout/detail' . $payment->reference);
+        return redirect('/checkout/detail/' . $payment->reference);
     }
 
     public function getDetail($reference)
     {
         $payment = Payment::query()
+            ->with('school', 'user', 'package', 'package.services')
             ->where('reference', $reference)
             ->where('approval_status', 0)
             ->where('expired_at', '>', now())
             ->firstOrFail();
+            // dd($payment);
         $tripay = (new TripayService())->detail($payment->reference);
 
-        return view('checkout.detail', compact('payment', 'tripay'));
+        return view('checkout.invoice', compact('payment', 'tripay'));
     }
 }

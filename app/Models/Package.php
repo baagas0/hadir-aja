@@ -18,4 +18,8 @@ class Package extends Model
         'one_time_attemp',
         'bundling_price',
     ];
+
+    public function services() {
+        return $this->hasMany(PackageService::class);
+    }
 }
