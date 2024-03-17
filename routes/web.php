@@ -23,8 +23,6 @@ Route::get('/home', function () {
 
 Auth::routes();
 
-
-
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
