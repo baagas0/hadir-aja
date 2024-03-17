@@ -30,10 +30,11 @@ class Authenticate extends Middleware
             );
         } else {
             dd('loginnnn sek');
+            die();
             // return redirect()->guest(route('login'));
             // $path = RouteServiceProvider::HOME;
-            header("Location: /login");
-            die();
+            // header("Location: /login");
+            // die();
         }
 
     }
