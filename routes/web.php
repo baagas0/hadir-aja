@@ -15,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    dd('route /');
     return redirect()->route('presence-dashboard');
 });
 Route::get('/home', function () {
+    dd('route home');
     return redirect()->route('presence-dashboard');
 });
 
