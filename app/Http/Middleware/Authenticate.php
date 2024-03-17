@@ -29,8 +29,8 @@ class Authenticate extends Middleware
             );
         } else {
             // return redirect()->guest(route('login'));
-            header("Location: /login");
-            die();
+            // header("Location: /login");
+            // die();
         }
 
     }
