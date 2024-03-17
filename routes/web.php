@@ -19,11 +19,11 @@ Route::get('', function () {
 });
 
 Route::get('/', function () {
-    dd('route /');
+    // dd('route /');
     return redirect()->route('presence-dashboard');
 });
 Route::get('/home', function () {
-    dd('route home');
+    // dd('route home');
     return redirect()->route('presence-dashboard');
 });
 
