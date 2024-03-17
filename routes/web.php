@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('presence-dashboard');
 });
 Route::get('/home', function () {
-    return redirect()->route('dashboard');
+    return redirect()->route('presence-dashboard');
 });
 
 Route::get('/tes', function () {

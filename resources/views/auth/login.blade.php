@@ -81,7 +81,7 @@
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                         <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
                             <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form"
-                                data-kt-redirect-url="{{ route('dashboard') }}" method="POST" action="{{ route('login') }}">
+                                data-kt-redirect-url="{{ route('presence-dashboard') }}" method="POST" action="{{ route('login') }}">
                                 <div class="text-center mb-11">
                                     <h1 class="text-gray-900 fw-bolder mb-3">Daftar</h1>
                                     <div class="text-gray-500 fw-semibold fs-6">Isi form 5 menit, dan dapatkan gratis 30
