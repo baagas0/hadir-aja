@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 
@@ -29,6 +30,7 @@ class Authenticate extends Middleware
             );
         } else {
             // return redirect()->guest(route('login'));
+            // $path = RouteServiceProvider::HOME;
             header("Location: /login");
             die();
         }
