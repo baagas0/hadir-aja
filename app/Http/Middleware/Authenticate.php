@@ -17,26 +17,26 @@ class Authenticate extends Middleware
     }
 
     // Add new method
-    protected function unauthenticated($request, array $guards)
-    {
+    // protected function unauthenticated($request, array $guards)
+    // {
 
-        if(str_contains($request->url(), '/api')) {
-            abort(
-                response()->json(
-                [
-                    'api_status' => '401',
-                    'message' => 'Unauthenticated',
-                ], 401)
-            );
-        } else {
-            dd('loginnnn sek');
-            die();
-            // return redirect()->guest(route('login'));
-            // $path = RouteServiceProvider::HOME;
-            // header("Location: /login");
-            // die();
-        }
+    //     if(str_contains($request->url(), '/api')) {
+    //         abort(
+    //             response()->json(
+    //             [
+    //                 'api_status' => '401',
+    //                 'message' => 'Unauthenticated',
+    //             ], 401)
+    //         );
+    //     } else {
+    //         dd('loginnnn sek');
+    //         die();
+    //         // return redirect()->guest(route('login'));
+    //         // $path = RouteServiceProvider::HOME;
+    //         // header("Location: /login");
+    //         // die();
+    //     }
 
-    }
+    // }
 
 }
