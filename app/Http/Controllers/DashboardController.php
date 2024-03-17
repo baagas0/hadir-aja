@@ -28,6 +28,7 @@ class DashboardController extends Controller
             ->whereYear('date', Carbon::now()->format('Y'));
         })->count();
 
+        dd($data);
         return view('dashboard.dashboard', $data);
     }
 }
