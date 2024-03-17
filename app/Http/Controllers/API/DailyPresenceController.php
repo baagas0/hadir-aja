@@ -279,7 +279,7 @@ class DailyPresenceController extends Controller
 
     public function face_matching ($relative_path_file_1, $relative_path_file_2) {
         // TO RUN SERVER *python flask_server.py*
-        $url = 'https://a02e-158-140-170-3.ngrok-free.app';
+        $url = 'https://baagas0-face-api.hf.space';
 
         $curl = curl_init();
 
