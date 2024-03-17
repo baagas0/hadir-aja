@@ -15,7 +15,7 @@
             <div id="#kt_app_sidebar_menu" data-kt-menu="true" data-kt-menu-expand="false" class="app-sidebar-menu-primary menu menu-column menu-rounded menu-sub-indention menu-state-bullet-primary px-3 mb-5">
                 <!--begin:Menu item-->
                 <div class="menu-item ">
-                    <a class="menu-link {{ $currentRoute == 'dashboard' ? 'active' : '' }}" href="/dashboard">
+                    <a class="menu-link {{ $currentRoute == 'presence-dashboard' ? 'active' : '' }}" href="/presence-dashboard">
                         <span class="menu-icon">
                             <i class="ki-outline ki-home-2 fs-2"></i>
                         </span>
