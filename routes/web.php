@@ -30,7 +30,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     // Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-    routeController('dashboard1', 'DashboardController');
+    routeController('presence-dashboard', 'DashboardController');
 
     routeController('school-location', 'SchoolLocationController');
     routeController('school-position', 'SchoolPositionController');

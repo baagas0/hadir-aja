@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function getIndex()
     {
         $data = [];
-        dd('cel');
+        // dd('cel');
         $data['presence_daily_today_count'] = PresenceDaily::whereDate('presence_date', Carbon::today())->whereIn('state', [ 'masuk', 'pulang' ])->count();
         $data['presence_barcode_today_count'] = PresenceBarcodeSchoolUser::whereHas('presence_barcode', function($q) {
             return $q->whereDate('date', Carbon::today());
@@ -28,7 +28,7 @@ class DashboardController extends Controller
             ->whereYear('date', Carbon::now()->format('Y'));
         })->count();
 
-        dd($data);
+        // dd($data);
         return view('dashboard.dashboard', $data);
     }
 }
