@@ -34,3 +34,6 @@ Route::group(['as' => 'api.', 'prefix' => '', 'middleware' => 'auth:api'], funct
 
     routeController('presence-barcode', 'API\PresenceBarcodeController');
 });
+
+routeController('tripay', 'API\CallbackController');
+// Route::post('tripay/callback', 'API\CallbackController');

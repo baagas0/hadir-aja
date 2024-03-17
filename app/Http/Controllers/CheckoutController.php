@@ -68,7 +68,7 @@ class CheckoutController extends Controller
         $payment = Payment::query()
             ->with('school', 'user', 'package', 'package.services')
             ->where('reference', $reference)
-            ->where('approval_status', 0)
+            // ->where('approval_status', 0)
             ->where('expired_at', '>', now())
             ->firstOrFail();
             // dd($payment);

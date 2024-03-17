@@ -12,6 +12,7 @@ class SchoolBilling extends Model
     protected $fillable = [
         'school_id',
         'package_id',
+        'merchant_ref',
         'price',
         'billing_code',
         'payment_duration',

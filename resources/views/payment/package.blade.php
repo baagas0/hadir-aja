@@ -99,7 +99,7 @@
                 <!--begin::Info-->
                 <div class="d-flex flex-column py-2">
                   <!--begin::Owner-->
-                  <div class="d-flex align-items-center fs-4 fw-bold mb-5">{{ $channel['name'] }} 
+                  <div class="d-flex align-items-center fs-4 fw-bold mb-5">{{ $channel['name'] }}
                   <span class="badge badge-light-success fs-7 ms-2">{{ $channel['code'] }}</span></div>
                   <!--end::Owner-->
                   <!--begin::Wrapper-->
@@ -119,7 +119,7 @@
                 <!--end::Info-->
                 <!--begin::Actions-->
                 <div class="d-flex align-items-center py-2">
-                  <form action="{{ url('checkout/store') }}" method="POST">
+                  <form action="{{ url('billing-invoice/register-package') }}" method="POST">
                     @csrf
                     <input type="hidden" name="package_id" value="{{ $package->id }}">
                     <input type="hidden" name="channel" value="{{ $channel['code'] }}">

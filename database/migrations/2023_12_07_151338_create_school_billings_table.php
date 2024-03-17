@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('school_id');
             $table->foreignId('package_id');
+            $table->text('merchant_ref');
             $table->double('price');
             $table->string('billing_code')->nullable();
             $table->integer('payment_duration')->default(1)->comment('1 bulan - 3 bulan - 6 bulan');

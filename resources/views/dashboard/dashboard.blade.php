@@ -287,7 +287,7 @@
     </div>
     <!--end::Row-->
     <!--begin::Row-->
-    <div class="row g-5 g-xl-10 g-xl-10">
+    <div class="row g-5 g-xl-10 g-xl-10" style="display: none">
         <div class="col-xl-12 mb-xl-10">
             <!--begin::Engage widget 1-->
             <div class="card h-md-100" dir="ltr">

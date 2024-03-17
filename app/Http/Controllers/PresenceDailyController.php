@@ -30,6 +30,7 @@ class PresenceDailyController extends Controller
                 return $query;
             })
             ->with('school_user')
+            ->orderBy('presence_date', 'desc')
             ->skip($start)
             ->take($length)
             ->get();

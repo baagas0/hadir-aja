@@ -140,7 +140,8 @@
         var handleSearchDatatable = function () {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('change', function (e) {
-                if(e.target.value.length > 2) dt.search(e.target.value).draw();
+                // if(e.target.value.length > 2) dt.search(e.target.value).draw();
+                dt.search(e.target.value).draw();
             });
         }
 

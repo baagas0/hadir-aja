@@ -7,7 +7,7 @@
     <!--begin::Invoice 2 main-->
     <div class="card">
     <!--begin::Body-->
-    <div class="card-body p-lg-20">
+    <div class="card-body p-lg-20" style="background-image: url({{ asset('assets/media/illustrations/paid-stamp.png') }});background-repeat: no-repeat;background-position: center;/*! opacity: 0.5; */">
         <!--begin::Layout-->
         <div class="d-flex flex-column flex-xl-row">
         <!--begin::Content-->

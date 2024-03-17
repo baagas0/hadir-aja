@@ -1,7 +1,15 @@
+@php
+    $remain_day = auth()->guard('web')->user()->school->remain_day;
+    $color = 'danger';
+    if ($remain_day  > 15) $color = 'success';
+    else if ($remain_day  > 0) $color = 'warning';
+    else $color = 'danger';
+@endphp
+
 <!--begin::Alert-->
-<div class="alert alert-dismissible bg-light-primary border border-primary d-flex flex-column flex-sm-row p-5 mb-5">
+<div class="alert alert-dismissible bg-light-{{ $color }} border border-{{ $color }} d-flex flex-column flex-sm-row p-5 mb-5">
   <!--begin::Icon-->
-  <i class="ki-duotone ki-search-list fs-2hx text-success me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+  <i class="ki-duotone ki-search-list fs-2hx text-{{ $color }} me-4 mb-5 mb-sm-0"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
   <!--end::Icon-->
 
   <!--begin::Wrapper-->
@@ -11,7 +19,12 @@
       <!--end::Title-->
 
       <!--begin::Content-->
-      <span>Paket anda akan berakhir dalam {{ auth()->guard('web')->user()->school->remain_day }} hari kedepan.</span>
+
+      @if($remain_day > 0)
+        <span>Paket anda akan berakhir dalam {{ $remain_day }} hari kedepan.</span>
+      @else
+        <span>Paket anda telah berakhir, segera perbarui paket anda.</span>
+      @endif
       <!--end::Content-->
   </div>
   <!--end::Wrapper-->

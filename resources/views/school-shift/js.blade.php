@@ -118,13 +118,14 @@
         var handleSearchDatatable = function () {
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             filterSearch.addEventListener('change', function (e) {
-                if(e.target.value.length > 2) dt.search(e.target.value).draw();
+                // if(e.target.value.length > 2) dt.search(e.target.value).draw();
+                dt.search(e.target.value).draw();
             });
         }
 
         // Filter Datatable
         var handleFilterDatatable = () => {
-            
+
         }
 
         // Delete customer
@@ -164,7 +165,7 @@
                                 dataType: 'json',
                                 cache: false,
                                 beforeSend: function () {
-                                    
+
                                 },
                                 success: function(res){
                                     return res;
@@ -219,7 +220,7 @@
 
         // Reset Filter
         var handleResetForm = () => {
-            
+
         }
 
         // Init toggle toolbar
@@ -228,10 +229,10 @@
             // Select all checkboxes
             const container = document.querySelector('#table_{{ $_id }}');
             const checkboxes = container.querySelectorAll('[type="checkbox"]');
-            
+
             // Select elements
             const deleteSelected = document.querySelector('[data-kt-docs-table-select="delete_selected"]');
-            
+
             // Listen select all checkbox
             // Remove header checked box
             const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
@@ -266,7 +267,7 @@
                         selected.push(c.value);
                     }
                 });
-                
+
                 Swal.fire({
                     text: "Anda yakin ingin menghapus data terpilih?",
                     icon: "warning",
@@ -287,7 +288,7 @@
                             dataType: 'json',
                             cache: false,
                             beforeSend: function () {
-                                
+
                             },
                             success: function(res){
                                 requestError = false;
@@ -313,7 +314,7 @@
                             showConfirmButton: false,
                             timer: 2000,
                         }).then(() => {
-                            console.log('success');   
+                            console.log('success');
                             Swal.fire({
                                 text: "Data berhasil terhapus!.",
                                 icon: "success",
@@ -369,7 +370,7 @@
                     count++;
                 }
             });
-            
+
             // Toggle toolbars
             if (checkedState) {
                 selectedCount.innerHTML = count;
@@ -406,7 +407,7 @@
                 const state = relatedTarget.dataset.state;
                 const id = relatedTarget.dataset.id;
                 const form = $('#form_{{ $_id }}');
-                
+
                 if (state === 'update') {
                     $('#modal_title_{{ $_id }}').text('Edit {{ $title }}');
                     form.attr('action', `{{ $route["update"] }}/${id}`);
@@ -424,7 +425,7 @@
                                     const val = data[column];
                                     // $(`input[name="${column}"]`).val(val);
                                     const el = $(`[name="${column}"]`);
-                                    
+
                                     if (el.length && el[0].tagName.toLowerCase() === 'input') {
                                         el.val(val);
                                     } else if (el.length && el[0].tagName.toLowerCase() === 'textarea') {
@@ -475,7 +476,7 @@
                         $('#modal_title_info').text(`Jam Masuk: ${data.shift_name}`)
                         $('#info_edit_button').text(`Edit: ${data.shift_name}`)
                         $('#info_edit_button').attr('data-id', data.id);
-                        
+
                         const school_shift_hours = data.school_shift_hours;
                         for (const shift of school_shift_hours) {
                             $(`#info_day_${shift.day_in}`).text(shift.day);
@@ -515,16 +516,16 @@
         }
         var formSubmit = function () {
             const form = $('#form_{{ $_id }}');
-            
+
             form.on('submit', function (e) {
                 e.preventDefault();
-                
+
                 const m = document.getElementById('modal_{{ $_id }}');
                 const modal = bootstrap.Modal.getInstance(m);
-           
+
                 const data = buildValue(form);
                 // console.log(data);
-                
+
                 $.ajax({
                     url: form.attr('action'),
                     method: form.attr('method'),
@@ -622,6 +623,6 @@
     // On document ready
     KTUtil.onDOMContentLoaded(function () {
         KTDatatablesServerSide.init();
-        
+
     });
 </script>

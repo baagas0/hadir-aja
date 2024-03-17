@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('reference')->unique();
             $table->decimal('amount', 13, 2)->nullable();
             $table->decimal('amount_received', 13, 2);
+            $table->enum('status', ['UNPAID', 'PAID', 'REFUND', 'EXPIRED', 'FAILED']);
             $table->tinyInteger('approval_status')->default(0);
             $table->timestamp('approval_at')->nullable();
             $table->timestamp('expired_at');
