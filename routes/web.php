@@ -21,6 +21,10 @@ Route::get('/home', function () {
     return redirect()->route('dashboard');
 });
 
+Route::get('/tes', function () {
+    dd('tttttttessss');
+});
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
