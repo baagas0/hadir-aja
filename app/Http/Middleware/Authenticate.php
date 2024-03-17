@@ -29,6 +29,7 @@ class Authenticate extends Middleware
                 ], 401)
             );
         } else {
+            dd('loginnnn sek');
             // return redirect()->guest(route('login'));
             // $path = RouteServiceProvider::HOME;
             header("Location: /login");
