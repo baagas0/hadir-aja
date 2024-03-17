@@ -23,10 +23,10 @@ class RedirectIfAuthenticated
         return $next($request);
 
 
-        if (Auth::guard('web')->check()) {
-            header("Location: /presence-dashboard");
-            die();
-        }
+        // if (Auth::guard('web')->check()) {
+        //     header("Location: /presence-dashboard");
+        //     die();
+        // }
         dd('hehehe');
 
         // dd($guards);
