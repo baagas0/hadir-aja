@@ -19,7 +19,13 @@ class RedirectIfAuthenticated
     {
         dd('RedirectIfAuthenticated', Auth::guard('web')->check());
 
-        if (Auth::guard('web')->check()) return redirect(RouteServiceProvider::HOME);
+        // if (Auth::guard('web')->check()) return redirect(RouteServiceProvider::HOME);
+        if (Auth::guard('web')->check()) {
+            header("Location: /presence-dashboard");
+            die();
+        }
+        dd('hehehe');
+
         // dd($guards);
         $guards = empty($guards) ? [null] : $guards;
 
