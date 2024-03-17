@@ -17,6 +17,7 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
+        dd('tes');
         $guards = empty($guards) ? ['web'] : $guards;
 
         foreach ($guards as $guard) {
