@@ -8,6 +8,7 @@ use App\Models\SchoolBillingQuota;
 use App\Models\SchoolBillingQuotaTransaction;
 use Carbon\Carbon;
 use CURLFile;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -118,6 +119,7 @@ class DailyPresenceController extends Controller
             file_put_contents($path_new_selfie_img, $base64_selfie_img);
 
             $face_matching = $this->face_matching($saved_selfie_img, $path_new_selfie_img);
+            dd($face_matching);
             if(is_null($face_matching)) return rApi(500, (object)[], "Server face recognition terkendala!");
             if(!isset($face_matching->data->match) || $face_matching->data->match === false) return rApi(500, (object)[], "Wajah tidak sama! {$face_matching->data->error_procentage}");
 
@@ -280,8 +282,9 @@ class DailyPresenceController extends Controller
     public function face_matching ($relative_path_file_1, $relative_path_file_2) {
         // TO RUN SERVER *python flask_server.py*
         $url = 'https://baagas0-face-api.hf.space';
-
+        // dd($relative_path_file_1, $relative_path_file_2);
         $curl = curl_init();
+        $relative_path_file_2 = '/home/ditya/Documents/www/hadir-aja/public/image/selfie/selfie-1706146248.png';
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => "$url/face_match",
@@ -299,6 +302,11 @@ class DailyPresenceController extends Controller
 
         $response = curl_exec($curl);
 
+        if ($response === false) {
+            dd(curl_error($curl), curl_errno($curl), $curl, $response, $relative_path_file_1, $relative_path_file_2);
+        }
+
+        dd();
         curl_close($curl);
         return json_decode($response);
     }

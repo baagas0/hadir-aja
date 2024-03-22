@@ -3,52 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\PresenceDaily;
+use App\Models\SchoolPosition;
+use App\Models\SchoolUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PresenceDailyController extends Controller
 {
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        return view('presence-daily.index');
-    }
+        $periode = $request->get('periode');
+        $student_name = $request->get('student_name');
+        $school_position_id = $request->get('school_position_id');
 
-    public function getData(Request $request)
-    {
-        $start = $request->get('start');
-        $length = $request->get('length');
+        $dateRange = [];
+        $startDate = $periode ? Carbon::parse(explode(' - ', $periode)[0]) : Carbon::now()->startOfMonth();
+        $endDate = $periode ? Carbon::parse(explode(' - ', $periode)[1]) : Carbon::now()->endOfMonth();
+        while ($startDate->lte($endDate)) {
+            $dateRange[] = $startDate->copy();
+            $startDate->addDay();
+        }
 
-        $search = $request->get('search')['value'];
+        $presences = PresenceDaily::whereBetween('presence_date',
+            [
+                Carbon::now()->startOfMonth(),
+                Carbon::now()->endOfMonth()
+            ])
+        ->get()
+        ->groupBy(['school_user_id', 'presence_date']);
 
-        $columns = PresenceDaily::COLUMNS;
-
-        $data = PresenceDaily::query()
-            ->when(!is_null($search), function ($query) use ($columns, $search) {
-                foreach ($columns as $key => $column) {
-                    if($key === 0) $query->where($column, 'like', '%'. $search. '%');
-                    else $query->orWhere($column, 'like', '%'. $search. '%');
-                }
-                return $query;
+        $students = SchoolUser::query()
+            ->when($student_name, function($q) use($student_name) {
+                return $q->where('student_name', 'like', "%$student_name%");
             })
-            ->with('school_user')
-            ->orderBy('presence_date', 'desc')
-            ->skip($start)
-            ->take($length)
+            ->when($school_position_id, function($q) use($school_position_id) {
+                return $q->where('school_position_id', $school_position_id);
+            })
             ->get();
-        $count = PresenceDaily::query()
-            ->when(!is_null($search), function ($query) use ($columns, $search) {
-                foreach ($columns as $key => $column) {
-                    if($key === 0) $query->where($column, 'like', '%'. $search. '%');
-                    else $query->orWhere($column, 'like', '%'. $search. '%');
-                }
-                return $query;
-            })
-            ->count();
+        // dd($student_name, $students);
 
-        return response()->json([
-            'data' => $data,
-            'recordsTotal' => $count,
-            'recordsFiltered' => $count,
-        ]);
+        $data = [];
+        foreach ($students as $key => $student) {
+            $temp = (object) [
+                'student' => $student,
+                'presence' => []
+            ];
+            foreach ($dateRange as $key => $date) {
+                // dd();
+                $temp->presence[$date->format('Y-m-d')] = isset($presences[$student->id][$date->format('Y-m-d')]) ? $presences[$student->id][$date->format('Y-m-d')][0] : null;
+                // dd($temp->presence[$date->format('Y-m-d')]);
+            }
+            $data[] = $temp;
+        }
+
+        $c = [];
+        $c['data'] = $data;
+        $c['date_range'] = $dateRange;
+        $c['start_date'] = $periode ? Carbon::parse(explode(' - ', $periode)[0]) : Carbon::now()->startOfMonth();
+        $c['end_date'] = $periode ? Carbon::parse(explode(' - ', $periode)[1]) : Carbon::now()->endOfMonth();
+        $c['positions'] = SchoolPosition::get();
+
+        return view('presence-daily.index', $c);
     }
 
     public function postPermit(Request $request)

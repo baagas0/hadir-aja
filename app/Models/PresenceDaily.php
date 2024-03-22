@@ -65,6 +65,10 @@ class PresenceDaily extends Model
         'status',
     ];
 
+    protected $appends = [
+        'color'
+    ];
+
     protected $casts = [
         'face_match_in_response' => 'array'
     ];
@@ -79,5 +83,16 @@ class PresenceDaily extends Model
 
     public function school_user() {
         return $this->belongsTo(SchoolUser::class);
+    }
+
+    public function getColorAttribute() {
+        $color = [
+            'hadir'     => 'success',
+            'izin'      => 'warning',
+            'sakit'     => 'info',
+            'mangkir'   => 'danger'
+        ];
+
+        return isset($color[$this->status]) ? $color[$this->status] : 'danger';
     }
 }
