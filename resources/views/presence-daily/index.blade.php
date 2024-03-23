@@ -208,7 +208,7 @@
     {{-- @include('presence-daily.table') --}}
 
     <div class="mb-6">
-        <form action="">
+        <form action="" id="form-filter">
             <div class="row mb-3">
                 <div class="col-xl-3 col-md-6 col-sm-12">
                     <div class="form-group">
@@ -235,7 +235,7 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-icon-primary btn-light-primary btn-sm">
+                <button type="submit" class="btn btn-icon-primary btn-light-primary btn-sm" onclick="document.getElementById('form-filter').action = '{{ route('presence-daily') }}'; document.getElementById('form-filter').submit()">
                     <i class="ki-duotone ki-filter-search">
                         <span class="path1"></span>
                         <span class="path2"></span>
@@ -243,7 +243,8 @@
                     </i>
                     Terapkan
                 </button>
-                <button class="btn btn-icon-white btn-warning btn-sm">
+                {{-- {{ route('presence-daily.download.pdf') }} --}}
+                <button class="btn btn-icon-white btn-warning btn-sm" onclick="document.getElementById('form-filter').action = '{{ route('presence-daily.download.pdf') }}'; document.getElementById('form-filter').submit()">
                     <i class="ki-duotone ki-document">
                         <span class="path1"></span>
                         <span class="path2"></span>
