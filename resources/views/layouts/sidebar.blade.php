@@ -42,7 +42,7 @@
                         <span class="menu-icon">
                             <i class="ki-outline ki-calendar-tick fs-2"></i>
                         </span>
-                        <span class="menu-title">Presensi</span>
+                        <span class="menu-title">Rekap Presensi</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <!--end:Menu link-->
@@ -174,7 +174,7 @@
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                     <!--begin:Menu link-->
-                    <span class="menu-link">
+                    <span class="menu-link active">
                         <span class="menu-icon">
                             <i class="ki-outline ki-financial-schedule -35 fs-2"></i>
                         </span>
@@ -183,11 +183,11 @@
                     </span>
                     <!--end:Menu link-->
                     <!--begin:Menu sub-->
-                    <div class="menu-sub menu-sub-accordion">
+                    <div class="menu-sub show menu-sub-accordion">
                         <!--begin:Menu item-->
                         <div class="menu-item">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="{{ route('billing-invoice.choose.package') }}">
+                            <a class="menu-link active" href="{{ route('billing-invoice.choose.package') }}">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
