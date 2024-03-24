@@ -18,6 +18,9 @@ class School extends Model
         'school_address',
         'pic_name',
         'register_ref_code',
+        'pic_email',
+        'pic_phone_number',
+        'pic_address'
     ];
 
     protected $appends = [

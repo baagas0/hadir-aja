@@ -57,6 +57,7 @@ class PresenceDailyController extends Controller
             $data[] = $temp;
         }
 
+        // dd($data);
         $c = [];
         $c['data'] = $data;
         $c['date_range'] = $dateRange;

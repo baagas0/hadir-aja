@@ -288,6 +288,13 @@
                 </tr>
             </thead>
             <tbody>
+
+                @if(count($data) === 0)
+                    <tr>
+                        <td  colspan="{{ 3 + count($date_range) }}">Tidak ada data</td>
+                    </tr>
+                @endif
+
                 @foreach ($data as $item)
                     <tr>
                         <td class="row-sticky w-40px text-center">{{ $loop->iteration }}</td>
@@ -310,6 +317,7 @@
                         @endforeach
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
 

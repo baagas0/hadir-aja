@@ -28,8 +28,8 @@ class SchoolPosition extends Model
         parent::boot();
 
         static::addGlobalScope('school_id', function (Builder $builder) {
-            $auth = Auth::user();
-            $builder->where('school_id',  $auth->school_id);
+            $auth = Auth::guard('web')->user();
+            if($auth) $builder->where('school_id',  $auth->school_id);
         });
     }
 }

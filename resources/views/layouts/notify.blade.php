@@ -1,7 +1,9 @@
 @php
-    $remain_day = auth()->guard('web')->user()->school->remain_day;
+    $school = auth()->guard('web')->user()->school;
+    $remain_day = $school->remain_day;
     $color = 'danger';
-    if ($remain_day  > 15) $color = 'success';
+    if ($school && !$school->active_billing_id) $color = 'info';
+    else if ($remain_day  > 15) $color = 'success';
     else if ($remain_day  > 0) $color = 'warning';
     else $color = 'danger';
 @endphp
@@ -20,7 +22,13 @@
 
       <!--begin::Content-->
 
-      @if($remain_day > 0)
+      @if ($school && !$school->active_billing_id)
+        <span>Anda belum terdaftar pada paket apapun <a href="{{ route('billing-invoice.choose.package') }}">Pilih paket disini</a></span>
+        {{-- <a href="{{ route('billing-invoice.choose.package') }}" class="btn btn-sm btn-{{ $color }}">
+            <i class="ki-duotone ki-chart-simple-2 fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+            Pilih Paket
+        </a> --}}
+      @elseif($remain_day > 0)
         <span>Paket anda akan berakhir dalam {{ $remain_day }} hari kedepan.</span>
       @else
         <span>Paket anda telah berakhir, segera perbarui paket anda.</span>
@@ -31,7 +39,7 @@
 
   <!--begin::Close-->
   <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
-      <i class="ki-duotone ki-cross fs-1 text-success"><span class="path1"></span><span class="path2"></span></i>
+      <i class="ki-duotone ki-cross fs-1 text-{{ $color }}"><span class="path1"></span><span class="path2"></span></i>
   </button>
   <!--end::Close-->
 </div>
