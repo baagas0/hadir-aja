@@ -134,8 +134,8 @@
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 </div>
-                                <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet?
-                                    <a type="button" href="{{ route('register') }}" class="link-primary">Sign up</a>
+                                <div class="text-gray-500 text-center fw-semibold fs-6">Daftarkan instansi anda
+                                    <a type="button" href="{{ route('register') }}" class="link-primary">Disini!!!</a>
                                 </div>
                             </form>
                         </div>

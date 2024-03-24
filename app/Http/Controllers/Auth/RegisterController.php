@@ -39,7 +39,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/billing-invoice/choose-package';
 
     /**
      * Create a new controller instance.
