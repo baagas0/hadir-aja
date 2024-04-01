@@ -281,13 +281,13 @@ class DailyPresenceController extends Controller
 
     public function face_matching ($relative_path_file_1, $relative_path_file_2) {
         // TO RUN SERVER *python flask_server.py*
-        $url = 'https://baagas0-face-api.hf.space';
+        $url = 'https://baagas0-ssim-face-compare.hf.space';
         // dd($relative_path_file_1, $relative_path_file_2);
         $curl = curl_init();
-        $relative_path_file_2 = '/home/ditya/Documents/www/hadir-aja/public/image/selfie/selfie-1706146248.png';
+        // $relative_path_file_2 = '/home/ditya/Documents/www/hadir-aja/public/image/selfie/selfie-1706146248.png';
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "$url/face_match",
+            CURLOPT_URL => "$url/compare",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -306,7 +306,7 @@ class DailyPresenceController extends Controller
             dd(curl_error($curl), curl_errno($curl), $curl, $response, $relative_path_file_1, $relative_path_file_2);
         }
 
-        dd();
+        // dd();
         curl_close($curl);
         return json_decode($response);
     }
