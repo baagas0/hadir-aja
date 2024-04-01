@@ -119,9 +119,8 @@ class DailyPresenceController extends Controller
             file_put_contents($path_new_selfie_img, $base64_selfie_img);
 
             $face_matching = $this->face_matching($saved_selfie_img, $path_new_selfie_img);
-            dd($face_matching);
-            if(is_null($face_matching)) return rApi(500, (object)[], "Server face recognition terkendala!");
-            if(!isset($face_matching->data->match) || $face_matching->data->match === false) return rApi(500, (object)[], "Wajah tidak sama! {$face_matching->data->error_procentage}");
+            if(isset($face_matching->detail)) return rApi(500, (object)[], "Server face recognition terkendala!");
+            if(!isset($face_matching->data->match) || $face_matching->data->match === false) return rApi(500, (object)[], "Wajah tidak sama! {$face_matching->data->similarity_percentage}");
 
             $data = [
                 'attachment_in' => $new_selfie_img,
@@ -226,7 +225,7 @@ class DailyPresenceController extends Controller
             $face_matching = $this->face_matching($saved_selfie_img, $path_new_selfie_img);
             // dd($face_matching);
             if(isset($face_matching->detail)) return rApi(500, (object)[], "Server face recognition terkendala!");
-            if(!isset($face_matching->data->match) || $face_matching->data->match === false) return rApi(500, (object)[], "Wajah tidak sama! {$face_matching->data->error_procentage}");
+            if(!isset($face_matching->data->match) || $face_matching->data->match === false) return rApi(500, (object)[], "Wajah tidak sama! {$face_matching->data->similarity_percentage}");
 
             $carbon_hour_in = Carbon::createFromTimeString($presence->hour_in);
             $carbon_hour_out = Carbon::now();

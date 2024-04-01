@@ -31,6 +31,12 @@ class AuthController extends Controller
             ->where('student_number', $credentials['student_number'])
             ->with('school_group')
             ->first();
+        if (!$user) {
+            return response()->json([
+                'status' => 'gagal',
+                'message' => 'Pengguna tidak ditemukan!',
+            ], 401);
+        }
 
         if (
             $user->device_id !== $credentials['device_id'] &&
