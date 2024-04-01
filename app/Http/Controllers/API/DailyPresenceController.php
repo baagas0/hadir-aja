@@ -224,7 +224,8 @@ class DailyPresenceController extends Controller
             file_put_contents($path_new_selfie_img, $base64_selfie_img);
 
             $face_matching = $this->face_matching($saved_selfie_img, $path_new_selfie_img);
-            if(is_null($face_matching)) return rApi(500, (object)[], "Server face recognition terkendala!");
+            // dd($face_matching);
+            if(isset($face_matching->detail)) return rApi(500, (object)[], "Server face recognition terkendala!");
             if(!isset($face_matching->data->match) || $face_matching->data->match === false) return rApi(500, (object)[], "Wajah tidak sama! {$face_matching->data->error_procentage}");
 
             $carbon_hour_in = Carbon::createFromTimeString($presence->hour_in);
@@ -295,7 +296,7 @@ class DailyPresenceController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array('file1'=> new CURLFILE($relative_path_file_1),'file2'=> new CURLFILE($relative_path_file_2)),
+            CURLOPT_POSTFIELDS => array('image1'=> new CURLFILE($relative_path_file_1),'image2'=> new CURLFILE($relative_path_file_2)),
             CURLOPT_HTTPHEADER => array(
             ),
         ));
